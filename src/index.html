@@ -30,9 +30,13 @@
     <script>
         async function getUserInfo() {
             const response = await fetch('/api/test');
-            const user = await response.json();
-            const pre = document.querySelector('pre');
-            pre.textContent = JSON.stringify(user, null, 2);
+            if (response.ok()) {
+                const user = await response.json();
+                const pre = document.querySelector('pre');
+                pre.textContent = JSON.stringify(user, null, 2);
+            } else {
+                pre.textContent = "error: " + response.statusText;
+            }
         }
 
         getUserInfo();
