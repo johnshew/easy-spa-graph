@@ -5,7 +5,7 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
     context.log("context: " + JSON.stringify(context));
     context.log("req: " + JSON.stringify(req));
     const user = req.body || {};
-    console.log(user);
+    context.log(user);
     context.res = {
         body: user
     }
