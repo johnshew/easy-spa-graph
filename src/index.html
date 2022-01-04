@@ -29,7 +29,7 @@
     <pre></pre>
     <script>
         async function getUserInfo() {
-            const response = await fetch('/test');
+            const response = await fetch('/api/test');
             const user = await response.json();
             const pre = document.querySelector('pre');
             pre.textContent = JSON.stringify(user, null, 2);
