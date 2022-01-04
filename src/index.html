@@ -31,7 +31,7 @@
         async function getUserInfo() {
             const response = await fetch('/api/test');
             const pre = document.querySelector('pre');
-            if (response.ok()) {
+            if (response.ok) {
                 const user = await response.json();                
                 pre.textContent = JSON.stringify(user, null, 2);
             } else {
