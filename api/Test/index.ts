@@ -5,7 +5,7 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
     context.log("context: " + JSON.stringify(context));
     context.log("req: " + JSON.stringify(req));
     var headers = req["headers"];
-    var user = [ headers["authorization"], headers["x-ms-client-principal"], headers["x-ms-client-principal-id"] ]
+    var user = [ headers["authorization"], headers["x-ms-client-principal"], headers["x-ms-auth-token"], headers["x-ms-client-principal-id"] ]
     context.log("user: " + JSON.stringify(user));
     context.res = {
         body: user
