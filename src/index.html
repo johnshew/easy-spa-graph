@@ -15,7 +15,9 @@
 <body>
     <h1>Azure Static Web Apps custom roles demo</h1>
     <div>
-        <a href="/.auth/login/aad">Login</a> | <a href="/.auth/logout">Logout</a>
+        <a href="/.auth/login/aad">Login via SWA AAD</a>
+        | <a onclick="signIn()" href="">login via MSAL</a>
+        | <a href="/.auth/logout">Logout</a>
     </div>
     <hr>
     <div>
@@ -28,30 +30,43 @@
     <hr>
     <pre id="auth"></pre>
     <pre id="api"></pre>
+    <script src="https://alcdn.msauth.net/browser/2.16.1/js/msal-browser.min.js"></script>
+    <script src="auth.js"></script>
     <script>
         async function getUserInfo() {
-            const response = await fetch('/.auth/me');
-            const pre = document.getElementById('auth');
-            if (response.ok) {
-                const user = await response.json();                
-                pre.textContent = JSON.stringify(user, null, 2);
-            } else {
-                pre.textContent = "error: " + response.statusText;
+            try {
+                const response = await fetch('/.auth/me');
+                const pre = document.getElementById('auth');
+                if (response.ok && response.status === 200) {
+                    const user = await response.json();
+                    pre.textContent = JSON.stringify(user, null, 2);
+                } else {
+                    pre.textContent = "error: " + response.statusText;
+                }
+            } catch (e) {
+                console.log(e);
             }
         }
         async function getApiResult(url) {
-            const response = await fetch(url);
-            const pre = document.getElementById('api');
-            if (response.ok) {
-                const user = await response.json();                
-                pre.textContent = JSON.stringify(user, null, 2);
-            } else {
-                pre.textContent = "error: " + response.statusText;
+            try {
+                const response = await fetch(url);
+                const pre = document.getElementById('api');
+                if (response.ok && response.status === 200) {
+                    const user = await response.json();
+                    console.log("Got json");
+                    pre.textContent = JSON.stringify(user, null, 2);
+                } else {
+                    pre.textContent = "error: " + response.statusText;
+                }
+            } catch (e) {
+                console.log(e);
             }
         }
         getUserInfo();
         getApiResult('/api/Test');
     </script>
+    
+
 </body>
 
 </html>
