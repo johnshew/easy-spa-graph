@@ -1,7 +1,7 @@
 const msalConfig = {
     auth: {
         clientId: '16fa985a-217c-4fbf-be68-fc8aa85532e5',
-        redirectUri: 'https://spa-graph-msal.vivitap.com/'
+        redirectUri: 'https://red-sand-0297fd91e.azurestaticapps.net',
     }
 };
 const msalRequest = {
